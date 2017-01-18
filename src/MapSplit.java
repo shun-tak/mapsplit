@@ -745,7 +745,10 @@ public class MapSplit {
 						if (!file.endsWith(".pbf"))
 							file = file + ".pbf";
 					} else {
-						file = basename + tileX + "_" + tileY + ".pbf";
+						String basedir = basename + ZOOM + "/" + tileX;
+						File f = new File(basedir);
+						f.mkdirs();
+						file = basedir + "/" + tileY + ".pbf";
 					}
 
 					OsmosisSerializer serializer =
@@ -917,7 +920,7 @@ public class MapSplit {
 		System.out.println("Usage: mapsplit [options] <infile> <output base>");
 		System.out.println("Mapsplit loads infile and stores any tile or tiles that got changed since a specified date in a tile file.\n");
 		System.out.println("infile: A tile file in pbf format");
-		System.out.println("output base: this is the base name of all tiles that will be written. The filename may contain '%x' and '%y' which will be replaced with the tilenumbers at zoom 13\n");
+		System.out.println("output base: this is the base name of all tiles that will be written. The filename may contain '%x' and '%y' which will be replaced with the tilenumbers at zoom " + ZOOM + "\n");
 
 		System.out.println("Options:");
 		System.out.println("  -h, --help         this help");
